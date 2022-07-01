@@ -21,3 +21,17 @@ class Deposit extends Transaction {
     return this.amount;
   }
 }
+
+export const addLists = function (data) {
+  const list = new Transaction(0, data);
+  list.commit();
+  function makeNewLists() {
+    $("#account-summary").append(`
+        <li>Name: ${list.account.username}</li>
+        <li>Amount: ${list.amount}</li>
+        `);
+  }
+  return makeNewLists();
+};
+
+export default { addLists };

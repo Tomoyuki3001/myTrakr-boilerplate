@@ -20,43 +20,89 @@
   </head>
   <body>
     myTrakr
-    <main>
-      <form action="">
+    <br>
+      <form action="" id="add-accounts-form">
         New Account:
-        <input type="text" />
-        <button>Add new account</button>
+        <input type="text" id="add-accounts-input" />
+        <button class="account-submit-btn" id="account-submit-btn">
+          Add new account
+        </button>
       </form>
-      <form action="">
-        New Transaction: Deposit
-        <input type="radio" />
-        Withdraw
-        <input type="radio" />
-        Transfer
-        <input type="radio" />
+      <br action="">
+        New Transaction: 
+        <br>
+       
+        <div>
+          <label>
+            Deposit
+          <input type="radio" class="radio" id="radio-deposit" name="input" value="deposit"/>
+        </label>
+        </div>
+        
+        <div>
+          <label>
+            Withdraw
+        <input type="radio"class="radio" id="radio-withdraw" name="input" value="withdraw"/>
+      </label>
+      </div>
+        
+        <div>
+          <label>
+            Transfer
+        <input type="radio"class="radio" id="radio-transfer" name="input" value="transfer"/>
+      </label>
+      </div>
+        </br>
+
+        <div id="from-box">
+          From:
+          <select id="accout-from">
+            <option value="">Select</option>
+          </select>
+        </div>
+  
+        <div id="to-box">
+          To:
+          <select id="accout-to">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+      <div id="acc-box">
         Account:
-        <select></select>
+        <select id="accout-select">
+          <option value="">Select</option>
+        </select>
+      </div>
 
-        From:
-        <select></select>
-
-        To:
-        <select></select>
+      
+        </br>
         Category:
-        <select></select>
-        <input type="text" />
-        <button type="button">Add new category</button>
+        <select id="category-select">
+          <option value="">Select</option>
+          <option id="add-new-category" value="new">Add new...</option>
+        </select>
 
+      <form action="" id="add-category-form">
+        <input type="text" id="category-name"/>
+        <button type="button" id="new-category-btn">Add new category</button>
+      </form>
+      </div>
+      </br>
         Description
         <input type="text" />
-
+      </br>
         Amount:
         <input type="number" />
+      </br>
 
-        <button>Add transaction</button>
+        <button type="button" id="new-transaction-btn">Add transaction</button>
+      </br>
       </form>
 
       Account summary
-      <ul></ul>
+      <ul id="account-summary"></ul>
+    </br>
       Filter by account:
       <select></select>
       <table>
@@ -72,10 +118,12 @@
         </tr>
       </table>
     </main>
-    <script src="./js/helpers/Account.js"></script>
-    <script src="./js/helpers/Category.js"></script>
+    <script type="module" src="./js/helpers/Account.js"></script>
+    <script type="module" src="./js/helpers/Category.js"></script>
     <script src="./js/helpers/Common.js"></script>
-    <script src="./js/helpers/Transaction.js"></script>
-    <script src="./js/index.js"></script>
+    <script type="module" src="./js/helpers/Transaction.js"></script>
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/categoriesArray.js"></script>
+    <script type="module" src="./js/transactionArray.js"></script>
   </body>
 </html>
