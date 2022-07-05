@@ -28,10 +28,8 @@
           Add new account
         </button>
       </form>
-      <br action="">
-        New Transaction: 
-        <br>
-       
+
+      New Transaction: 
         <div>
           <label>
             Deposit
@@ -52,62 +50,64 @@
         <input type="radio"class="radio" id="radio-transfer" name="input" value="transfer"/>
       </label>
       </div>
-        </br>
-
+      <br>
+      <form action="" id="transaction-form">
+        
         <div id="from-box">
           From:
-          <select id="accout-from">
+          <select id="accout-from" class="account-select">
             <option value="">Select</option>
           </select>
         </div>
-  
+    
         <div id="to-box">
           To:
-          <select id="accout-to">
+          <select id="accout-to" class="account-select">
             <option value="">Select</option>
           </select>
         </div>
-
+    
       <div id="acc-box">
         Account:
-        <select id="accout-select">
+        <select id="accout-select" class="account-select">
           <option value="">Select</option>
         </select>
       </div>
 
-      
         </br>
+
         Category:
         <select id="category-select">
           <option value="">Select</option>
           <option id="add-new-category" value="new">Add new...</option>
         </select>
-
+        <div id="category-form">
       <form action="" id="add-category-form">
         <input type="text" id="category-name"/>
         <button type="button" id="new-category-btn">Add new category</button>
       </form>
-      </div>
+    </div>
+
       </br>
         Description
-        <input type="text" />
+        <input type="text" id="description-input"/>
       </br>
         Amount:
-        <input type="number" />
+        <input type="number" id="amount-input"/>
       </br>
 
         <button type="button" id="new-transaction-btn">Add transaction</button>
       </br>
-      </form>
+    </form>
 
       Account summary
       <ul id="account-summary"></ul>
     </br>
       Filter by account:
       <select></select>
-      <table>
+      <table id="data-table">
         <tr>
-          <th>Id</th>
+          <th>transaction Id</th>
           <th>Username</th>
           <th>Transaction Type</th>
           <th>Category</th>
@@ -123,7 +123,5 @@
     <script src="./js/helpers/Common.js"></script>
     <script type="module" src="./js/helpers/Transaction.js"></script>
     <script type="module" src="./js/index.js"></script>
-    <script type="module" src="./js/categoriesArray.js"></script>
-    <script type="module" src="./js/transactionArray.js"></script>
   </body>
 </html>
