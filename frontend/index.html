@@ -30,7 +30,7 @@
       </form>
 
       New Transaction: 
-        <div>
+        <div id="radio-deposit">
           <label>
             Deposit
           <input type="radio" class="radio" id="radio-deposit" name="input" value="deposit"/>
@@ -53,23 +53,23 @@
       <br>
       <form action="" id="transaction-form">
         
-        <div id="from-box">
+        <div class="account-select" id="from-box" value="select">
           From:
-          <select id="accout-from" class="account-select">
-            <option value="">Select</option>
+          <select class="select_account" id="accout-from" class="account-select">
+            <option value="select">Select</option>
           </select>
         </div>
     
-        <div id="to-box">
+        <div class="account-select" id="to-box">
           To:
-          <select id="accout-to" class="account-select">
-            <option value="">Select</option>
+          <select class="select_account" id="accout-to" class="account-select">
+            <option value="select">Select</option>
           </select>
         </div>
     
-      <div id="acc-box">
+      <div  id="acc-box">
         Account:
-        <select id="accout-select" class="account-select">
+        <select class="select_account" id="accout-select" class="account-select">
           <option value="">Select</option>
         </select>
       </div>
@@ -104,7 +104,10 @@
       <ul id="account-summary"></ul>
     </br>
       Filter by account:
-      <select></select>
+      <select class="select_account" id="accounts-filter">
+        <option value="all">All</option>
+      </select>
+      <div id="table-box">
       <table id="data-table">
         <tr>
           <th>transaction Id</th>
@@ -117,6 +120,7 @@
           <th>To</th>
         </tr>
       </table>
+    </div>
     </main>
     <script type="module" src="./js/helpers/Account.js"></script>
     <script type="module" src="./js/helpers/Category.js"></script>

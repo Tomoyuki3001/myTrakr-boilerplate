@@ -23,13 +23,11 @@ getCategories();
 $("#new-category-btn").on("click", (event) => {
   event.preventDefault();
   postNewCategory();
-  $("#add-category-form").hide();
-  $("#add-new-category").remove();
+  $("#category-form").hide();
 });
 
 $("#category-select").on("change", () => {
   showNewCategory();
-  console.log("change");
 });
 
 //Transactions
@@ -41,20 +39,22 @@ $("#new-transaction-btn").on("click", (event) => {
   postNewTransaction();
 });
 
-//Radio buttons part
+$("#default-radio").hide();
 
-$('#radio-deposit[name="input"]').click(function () {
-  $("#from-box, #to-box").hide();
-  $("#acc-box").show();
-  console.log("input value", $('#radio-deposit[name="input"]').val());
+//Radio buttons part
+$("#from-box, #to-box").hide();
+
+$('[name="input"]').change(function () {
+  if (this.value === "transfer") {
+    $("#from-box, #to-box").show();
+    $("#acc-box").hide();
+  } else {
+    $("#from-box, #to-box").hide();
+    $("#acc-box").show();
+  }
 });
-$('#radio-withdraw[name="input"]').click(function () {
-  $("#from-box, #to-box").hide();
-  $("#acc-box").show();
-  console.log("input value", $('#radio-withdraw[name="input"]').val());
-});
-$('#radio-transfer[name="input"]').click(function () {
-  $("#from-box, #to-box").show();
-  $("#acc-box").hide();
-  console.log("input value", $('#radio-transfer[name="input"]').val());
+
+$("#radio-deposit, #radio-withdraw").click(function () {
+  $("#from-box select").val("select").change();
+  $("#to-box select").val("select").change();
 });

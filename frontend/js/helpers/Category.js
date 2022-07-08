@@ -19,7 +19,6 @@ export const getCategories = function () {
     url: "http://localhost:3000/categories",
     dataType: "json",
   }).done((data) => {
-    console.log("Category's array", data);
     data.forEach((element) => {
       newCategorysArray.push(element);
       setCategory(element);
@@ -31,7 +30,7 @@ function setCategory(element) {
   const categoryOption = document.createElement("option");
   categoryOption.innerHTML = element.name;
   categoryOption.setAttribute("value", element.name);
-  $("#category-select").append(categoryOption);
+  $("#category-select").prepend(categoryOption);
 }
 
 //Post a new category to ajax data
@@ -46,7 +45,7 @@ function createNewCategory() {
 }
 
 function addNewCategoriesToTheSelect(data) {
-  $("#category-select").append(`
+  $("#category-select").prepend(`
         <option>${data.name}</option>
         `);
 }
