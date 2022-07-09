@@ -25,7 +25,6 @@ class Transaction {
   commit() {
     if (this.value < 0 && this.amount > this.account.balance) return;
     this.account.transactions.push(this.value);
-    // this.account.balance += this.value;
   }
 }
 
@@ -57,7 +56,6 @@ class Transfer extends Transaction {
 let newTransactionArray = [];
 
 export function setNewTransaction(transactions) {
-  // console.log("transactions", transactions);
   if (transactions.length > 0) {
     const newTransactions = transactions.map((transaction) => {
       if (transaction.type == "deposit") {
@@ -108,7 +106,6 @@ export const getTransaction = function () {
     url: "http://localhost:3000/transactions",
     dataType: "json",
   }).done((data) => {
-    console.log("check", data);
     data.forEach((element) => {
       let newArr = [];
       if (element.length > 0) {
@@ -153,13 +150,12 @@ export const getTransaction = function () {
       }
       newTransactionArray = [...newTransactionArray, ...newArr];
     });
-    console.log("data", newTransactionArray);
     setTransactionsToList(newTransactionArray);
     $("#accounts-filter").on("change", () => {
       $("#data-table").remove();
       $("#table-box").append(`
-      <table id="data-table">
-        <tr>
+      <table class="transaction_table" id="data-table">
+        <tr class="transaction_table_raw">
           <th>transaction Id</th>
           <th>Username</th>
           <th>Transaction Type</th>
@@ -198,7 +194,6 @@ export const postNewTransaction = function () {
     description: $("#description-input").val(),
     category: $("#category-select").val(),
   };
-  console.log("new transaction", newTransaction);
   if (newTransaction.type == "" || newTransaction.type == undefined) {
     alert("Please select a valid type");
     return;
@@ -252,7 +247,6 @@ export const postNewTransaction = function () {
     alert("Please type valid amount");
     return;
   }
-  // if (newTransaction.type == "transfer" && newTransaction.amount ==)
   $.ajax({
     method: "post",
     data: JSON.stringify({ newTransaction }),
@@ -260,7 +254,6 @@ export const postNewTransaction = function () {
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {
-    console.log("transaction data", data);
     addTransactionsToList(data);
     calcurateTransfer(data);
   });
@@ -269,7 +262,6 @@ export const postNewTransaction = function () {
 function calcurateTransfer(data) {
   const newTransactions = setNewTransaction(data);
   newTransactions.forEach((transaction) => {
-    console.log("transaction", transaction);
     const balanceEl = $(`[data-id=${transaction.accountId}] span`);
     const currentBalance = balanceEl.text();
     const newBalance = Number(currentBalance) + transaction.value;
@@ -312,7 +304,7 @@ function setTransactionsToList(data) {
       }
     }
     $("#data-table").append(`
-  <tr id="table-raw">
+  <tr class="transaction_table_raw" id="table-raw">
   <td>${newTransaction.id}</td>
   <td id="id-account">${accountName}</td>
   <td>${newTransaction.type}</td>
@@ -333,7 +325,6 @@ function addTransactionsToList(data) {
   let sign = "";
   for (let i = 0; i < data.length; i++) {
     const newTransaction = data[i];
-    console.log("check transaction ", newTransaction);
     accountName = getUsernameById(newTransaction.accountId);
     if (newTransaction.type == "deposit") {
       accountNameFrom = "Nothing";
@@ -360,7 +351,7 @@ function addTransactionsToList(data) {
       }
     }
     $("#data-table").append(`
-  <tr>
+  <tr class="transaction_table_raw" >
   <td>${newTransaction.id}</td>
   <td id="id-account">${accountName}</td>
   <td>${newTransaction.type}</td>

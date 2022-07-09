@@ -26,7 +26,6 @@ export const getAccounts = function () {
     url: "http://localhost:3000/accounts",
     dataType: "json",
   }).done((array) => {
-    // setAccountsFilter(array);B
     array.forEach((element) => {
       setNewAccountArray(element);
       newAccountArray.push(element);
@@ -50,19 +49,10 @@ function setNewAccountArray(data) {
   $(".select_account").append(accountOption);
 }
 
-// function setAccountsFilter(data) {
-//   for (let i = 0; i < data.length; i++) {
-//     const accountFilterName = document.createElement("option");
-//     accountFilterName.innerHTML = data[i].username;
-//     accountFilterName.setAttribute("value", data[i].id);
-//     $("#accounts-filter").append(accountFilterName);
-//   }
-// }
-
 //Set default account summary
 function setAccountsummary(data) {
   $("#account-summary").append(`
-    <li data-id="${data.id}">Account: ${data.username},  Balance: <span id="summary-balance">${data.balance}</span></li>
+    <li data-id="${data.id}">Account : ${data.username} Balance : <span id="summary-balance">${data.balance}</span></li>
     `);
 }
 
