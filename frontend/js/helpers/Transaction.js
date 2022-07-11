@@ -89,7 +89,6 @@ export const getTransaction = function () {
     url: "http://localhost:3000/transactions",
     dataType: "json",
   }).done((data) => {
-    console.log("get data", data);
     data.forEach((element) => {
       let newArr = [];
       if (element.length > 0) {
@@ -153,23 +152,28 @@ export const postNewTransaction = function () {
       alert("Please select a valid account");
       return;
     }
-    if (
-      newTransaction.type == "transfer" &&
-      newTransaction.accountIdFrom == ""
-    ) {
-      alert("Please select a valid 'from account' to trasfer");
-      return;
-    }
-    if (newTransaction.type == "transfer" && newTransaction.accountIdTo == "") {
-      alert("Please select a valid 'to account' to trasfer");
-      return;
-    }
+  }
+  if (
+    newTransaction.type == "transfer" &&
+    newTransaction.accountIdTo === "select" &&
+    newTransaction.accountIdFrom === "select"
+  ) {
+    alert("Please select a valid account to transfer");
+    return;
   }
   if (
     newTransaction.type == "transfer" &&
     newTransaction.accountIdFrom == newTransaction.accountIdTo
   ) {
     alert("You can't select the same name accounts");
+    return;
+  }
+  if (
+    (newTransaction.type == "transfer" &&
+      newTransaction.accountIdTo === "select") ||
+    newTransaction.accountIdFrom === "select"
+  ) {
+    alert("Please select another valid account to transfer");
     return;
   }
   if (
@@ -203,6 +207,7 @@ export const postNewTransaction = function () {
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {
+    console.log("data checking", data);
     setTransactionsToList(data);
     calcurateTransfer(data);
   });
