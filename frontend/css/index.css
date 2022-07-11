@@ -11,20 +11,25 @@ body {
   margin: 2% 0%;
 }
 
-.create_account, .create_category {
+select {
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+}
+
+.create_account {
   display: flex;
   align-items: center;
 }
-.create_account .create_account_p, .create_category .create_account_p {
+.create_account .create_account_p {
   margin: 0% 2% 0% 0%;
 }
-.create_account .create_account_input, .create_account .create_category_input, .create_category .create_account_input, .create_category .create_category_input {
+.create_account .create_account_input {
   width: 20%;
-  padding: 0.5% 2%;
+  padding: 0.5% 1%;
   margin-right: 2%;
   border: 1px solid #000000;
 }
-.create_account .create_account_btn, .create_account .create_category_btn, .create_category .create_account_btn, .create_category .create_category_btn {
+.create_account .create_account_btn {
   background-color: #000000;
   color: #F7F7F7;
   padding: 0.5% 1%;
@@ -122,6 +127,19 @@ input[type=radio]:checked + span::after {
   border: 1px solid #000000;
 }
 .category_box .create_category .create_category_btn {
+  background-color: #000000;
+  color: #F7F7F7;
+  padding: 0.5% 1%;
+}
+
+.create_category_input {
+  width: 20%;
+  padding: 0.5% 1%;
+  margin-right: 2%;
+  border: 1px solid #000000;
+}
+
+.create_category_btn {
   background-color: #000000;
   color: #F7F7F7;
   padding: 0.5% 1%;

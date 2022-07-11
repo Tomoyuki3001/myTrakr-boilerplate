@@ -3,24 +3,15 @@ import { getUsernameById } from "./Account.js";
 //Transaction's class
 
 class Transaction {
-  constructor(
-    id,
-    type,
-    accountId,
-    category,
-    description,
-    amount,
-    accountIdTo,
-    accountIdFrom
-  ) {
-    this.id = id;
-    this.type = type;
-    this.accountId = accountId;
-    this.category = category;
-    this.description = description;
-    this.amount = amount;
-    this.accountIdTo = accountIdTo;
-    this.accountIdFrom = accountIdFrom;
+  constructor(transaction) {
+    this.id = transaction.id;
+    this.type = transaction.type;
+    this.accountId = transaction.accountId;
+    this.category = transaction.category;
+    this.description = transaction.description;
+    this.amount = Number(transaction.amount);
+    this.accountIdTo = transaction.accountIdTo;
+    this.accountIdFrom = transaction.accountIdFrom;
   }
   commit() {
     if (this.value < 0 && this.amount > this.account.balance) return;
@@ -42,62 +33,54 @@ class Deposit extends Transaction {
 
 class Transfer extends Transaction {
   get value() {
-    if (this.accountId == this.accountIdTo) {
+    if (this.accountId == this.accountIdFrom) {
       return -this.amount;
     }
-    if (this.accountId == this.accountIdFrom) {
+    if (this.accountId == this.accountIdTo) {
       return this.amount;
     }
   }
 }
 
-//To get the default information
+//Create new class with Transaction class
 
 let newTransactionArray = [];
+
+function convertTransaction(transaction) {
+  if (transaction.type == "deposit") {
+    return new Deposit(transaction);
+  }
+  if (transaction.type == "withdraw") {
+    return new Withdrawal(transaction);
+  }
+  if (transaction.type == "transfer") {
+    return new Transfer(transaction);
+  }
+}
+
+//To get the default information
 
 export function setNewTransaction(transactions) {
   if (transactions.length > 0) {
     const newTransactions = transactions.map((transaction) => {
-      if (transaction.type == "deposit") {
-        return new Deposit(
-          transaction.id,
-          transaction.type,
-          transaction.accountId,
-          transaction.category,
-          transaction.description,
-          Number(transaction.amount),
-          transaction.accountIdFrom,
-          transaction.accountIdTo
-        );
-      }
-      if (transaction.type == "withdraw") {
-        return new Withdrawal(
-          transaction.id,
-          transaction.type,
-          transaction.accountId,
-          transaction.category,
-          transaction.description,
-          Number(transaction.amount),
-          transaction.accountIdFrom,
-          transaction.accountIdTo
-        );
-      }
-      if (transaction.type == "transfer") {
-        return new Transfer(
-          transaction.id,
-          transaction.type,
-          transaction.accountId,
-          transaction.category,
-          transaction.description,
-          Number(transaction.amount),
-          transaction.accountIdFrom,
-          transaction.accountIdTo
-        );
-      }
+      return convertTransaction(transaction);
     });
     return newTransactions;
   }
   return transactions;
+}
+
+function deposit(transaction) {
+  return new Deposit(
+    transaction.id,
+    transaction.type,
+    transaction.accountId,
+    transaction.category,
+    transaction.description,
+    Number(transaction.amount),
+    transaction.accountIdFrom,
+    transaction.accountIdTo
+  );
 }
 
 export const getTransaction = function () {
@@ -106,46 +89,12 @@ export const getTransaction = function () {
     url: "http://localhost:3000/transactions",
     dataType: "json",
   }).done((data) => {
+    console.log("get data", data);
     data.forEach((element) => {
       let newArr = [];
       if (element.length > 0) {
         newArr = element.map((transaction) => {
-          if (transaction.type == "deposit") {
-            return new Deposit(
-              transaction.id,
-              transaction.type,
-              transaction.accountId,
-              transaction.category,
-              transaction.description,
-              Number(transaction.amount),
-              transaction.accountIdFrom,
-              transaction.accountIdTo
-            );
-          }
-          if (transaction.type == "withdraw") {
-            return new Withdrawal(
-              transaction.id,
-              transaction.type,
-              transaction.accountId,
-              transaction.category,
-              transaction.description,
-              Number(transaction.amount),
-              transaction.accountIdFrom,
-              transaction.accountIdTo
-            );
-          }
-          if (transaction.type == "transfer") {
-            return new Transfer(
-              transaction.id,
-              transaction.type,
-              transaction.accountId,
-              transaction.category,
-              transaction.description,
-              Number(transaction.amount),
-              transaction.accountIdFrom,
-              transaction.accountIdTo
-            );
-          }
+          return convertTransaction(transaction);
         });
       }
       newTransactionArray = [...newTransactionArray, ...newArr];
@@ -254,7 +203,7 @@ export const postNewTransaction = function () {
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {
-    addTransactionsToList(data);
+    setTransactionsToList(data);
     calcurateTransfer(data);
   });
 };
@@ -276,93 +225,40 @@ function setTransactionsToList(data) {
   let accountNameFrom = "";
   let accountNameTo = "";
   let sign = "";
-  for (let i = 0; i < data.length; i++) {
-    const newTransaction = data[i];
+  data.forEach((newTransaction) => {
     accountName = getUsernameById(newTransaction.accountId);
     if (newTransaction.type == "deposit") {
-      accountNameFrom = "Nothing";
+      accountNameFrom = "ー";
       accountNameTo = getUsernameById(newTransaction.accountId);
-      sign = "+";
-      newTransaction.amount = newTransaction.value;
     }
     if (newTransaction.type == "withdraw") {
-      accountNameTo = "Nothing";
+      accountNameTo = "ー";
       accountNameFrom = getUsernameById(newTransaction.accountId);
-      sign = "";
-      newTransaction.amount = newTransaction.value;
+      sign = "-";
     }
     if (newTransaction.type == "transfer") {
       accountNameTo = getUsernameById(newTransaction.accountIdTo);
       accountNameFrom = getUsernameById(newTransaction.accountIdFrom);
       if (newTransaction.accountId == newTransaction.accountIdTo) {
         sign = "";
-        newTransaction.amount = newTransaction.value;
-      }
-      if (newTransaction.accountId == newTransaction.accountIdFrom) {
-        sign = "+";
-        newTransaction.amount = newTransaction.value;
-      }
-    }
-    $("#data-table").append(`
-  <tr class="transaction_table_raw" id="table-raw">
-  <td>${newTransaction.id}</td>
-  <td id="id-account">${accountName}</td>
-  <td>${newTransaction.type}</td>
-  <td>${newTransaction.category}</td>
-  <td>${newTransaction.description}</td>
-  <td><span>${sign}</span>${newTransaction.amount}</td>
-  <td id="id-from">${accountNameTo}</td>
-  <td id="id-to">${accountNameFrom}</td>
-  </tr>
-  `);
-  }
-}
-
-function addTransactionsToList(data) {
-  let accountName = "";
-  let accountNameFrom = "";
-  let accountNameTo = "";
-  let sign = "";
-  for (let i = 0; i < data.length; i++) {
-    const newTransaction = data[i];
-    accountName = getUsernameById(newTransaction.accountId);
-    if (newTransaction.type == "deposit") {
-      accountNameFrom = "Nothing";
-      accountNameTo = getUsernameById(newTransaction.accountId);
-      sign = "+";
-      newTransaction.amount = newTransaction.amount;
-    }
-    if (newTransaction.type == "withdraw") {
-      accountNameTo = "Nothing";
-      accountNameFrom = getUsernameById(newTransaction.accountId);
-      sign = "-";
-      newTransaction.amount = newTransaction.amount;
-    }
-    if (newTransaction.type == "transfer") {
-      accountNameTo = getUsernameById(newTransaction.accountIdTo);
-      accountNameFrom = getUsernameById(newTransaction.accountIdFrom);
-      if (newTransaction.accountId == newTransaction.accountIdTo) {
-        sign = "+";
-        newTransaction.amount = newTransaction.amount;
       }
       if (newTransaction.accountId == newTransaction.accountIdFrom) {
         sign = "-";
-        newTransaction.amount = newTransaction.amount;
       }
     }
     $("#data-table").append(`
-  <tr class="transaction_table_raw" >
-  <td>${newTransaction.id}</td>
-  <td id="id-account">${accountName}</td>
-  <td>${newTransaction.type}</td>
-  <td>${newTransaction.category}</td>
-  <td>${newTransaction.description}</td>
-  <td id="${accountName}"><span>${sign}</span>${newTransaction.amount}</td>
-  <td id="id-from">${accountNameFrom}</td>
-  <td id="id-to">${accountNameTo}</td>
-  </tr>
-  `);
-  }
+    <tr class="transaction_table_raw" id="table-raw">
+    <td>${newTransaction.id}</td>
+    <td id="id-account">${accountName}</td>
+    <td>${newTransaction.type}</td>
+    <td>${newTransaction.category}</td>
+    <td>${newTransaction.description}</td>
+    <td><span>${sign}</span>${newTransaction.amount}</td>
+    <td id="id-from">${accountNameFrom}</td>
+    <td id="id-to">${accountNameTo}</td>
+    </tr>
+    `);
+  });
 }
 
 export default {

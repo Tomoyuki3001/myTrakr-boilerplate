@@ -12,21 +12,26 @@ body {
     }
 }
 
+select {
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+}
+
 //Create accounts and categories
 
-.create_account, .create_category {
+.create_account{
     display: flex;
     align-items: center;
     .create_account_p {
         margin: 0% 2% 0% 0%;
     }
-        .create_account_input, .create_category_input{
+        .create_account_input{
             width: 20%;
-            padding: 0.5% 2%;
+            padding: 0.5% 1%;
             margin-right: 2%;
             border: 1px solid #000000;
         }
-    .create_account_btn, .create_category_btn {
+    .create_account_btn{
         background-color: #000000;
         color: #F7F7F7;
         padding: 0.5% 1%;
@@ -126,6 +131,20 @@ body {
     }
   }
 }
+
+//Create new categories
+.create_category_input{
+  width: 20%;
+  padding: 0.5% 1%;
+  margin-right: 2%;
+  border: 1px solid #000000;
+}
+.create_category_btn{
+  background-color: #000000;
+  color: #F7F7F7;
+  padding: 0.5% 1%;
+}
+
 
 //DEscription and amount setting
 
