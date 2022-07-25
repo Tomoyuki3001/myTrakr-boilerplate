@@ -1,4 +1,5 @@
 import { getUsernameById } from "./Account.js";
+import { domainUrl } from "./Common.js";
 
 //Transaction's class
 

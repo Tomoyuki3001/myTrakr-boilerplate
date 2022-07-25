@@ -1,3 +1,4 @@
+import { domainUrl } from "./Common.js";
 // Show up or hide the "Add new..."
 
 export function showNewCategory() {
