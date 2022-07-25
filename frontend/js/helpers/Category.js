@@ -16,7 +16,7 @@ export const getCategories = function () {
   $("#category-form").hide();
   $.ajax({
     method: "get",
-    url: "http://localhost:3000/categories",
+    url: `${domainUrl}/categories`,
     dataType: "json",
   }).done((data) => {
     data.forEach((element) => {
@@ -69,7 +69,7 @@ export const postNewCategory = function () {
   $.ajax({
     method: "post",
     data: JSON.stringify(category),
-    url: "http://localhost:3000/categories",
+    url: `${domainUrl}/categories`,
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {

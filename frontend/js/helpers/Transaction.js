@@ -86,7 +86,7 @@ function deposit(transaction) {
 export const getTransaction = function () {
   $.ajax({
     method: "get",
-    url: "http://localhost:3000/transactions",
+    url: `${domainUrl}/transactions`,
     dataType: "json",
   }).done((data) => {
     data.forEach((element) => {
@@ -201,7 +201,7 @@ export const postNewTransaction = function () {
   $.ajax({
     method: "post",
     data: JSON.stringify({ newTransaction }),
-    url: "http://localhost:3000/transaction",
+    url: `${domainUrl}/transaction`,
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {
