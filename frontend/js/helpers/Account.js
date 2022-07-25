@@ -1,6 +1,7 @@
 //Account default setting
 
 import { setNewTransaction } from "./Transaction.js";
+import { domainUrl } from "./Common.js";
 
 class Account {
   constructor(username, id, transactions = []) {
@@ -28,7 +29,7 @@ const newAccountArray = [];
 export const getAccounts = function () {
   $.ajax({
     method: "get",
-    url: "http://localhost:3000/accounts",
+    url: `${domainUrl}/accounts`,
     dataType: "json",
   }).done((array) => {
     array.forEach((element) => {
@@ -78,7 +79,7 @@ export const createNewAccounts = function () {
   $.ajax({
     method: "post",
     data: JSON.stringify({ newAccount }),
-    url: "http://localhost:3000/accounts",
+    url: `${domainUrl}/accounts`,
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {
