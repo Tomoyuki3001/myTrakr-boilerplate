@@ -154,8 +154,8 @@ export const postNewTransaction = function () {
     }
   }
   if (
-    newTransaction.type == "transfer" &&
-    newTransaction.accountIdTo === "select" &&
+    (newTransaction.type == "transfer" &&
+      newTransaction.accountIdTo === "select") ||
     newTransaction.accountIdFrom === "select"
   ) {
     alert("Please select a valid account to transfer");
@@ -166,14 +166,6 @@ export const postNewTransaction = function () {
     newTransaction.accountIdFrom == newTransaction.accountIdTo
   ) {
     alert("You can't select the same name accounts");
-    return;
-  }
-  if (
-    (newTransaction.type == "transfer" &&
-      newTransaction.accountIdTo === "select") ||
-    newTransaction.accountIdFrom === "select"
-  ) {
-    alert("Please select another valid account to transfer");
     return;
   }
   if (

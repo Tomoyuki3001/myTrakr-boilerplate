@@ -10,10 +10,15 @@ class Account {
   }
 
   get balance() {
+    // return this._balance
     return this.transactions.reduce((total, transaction) => {
       return total + transaction.value;
     }, 0);
   }
+
+  // set setBalance(newValue) {
+  //   this._balance = newValue;
+  // }
 }
 
 // Get the ajax data when the page is loaded
