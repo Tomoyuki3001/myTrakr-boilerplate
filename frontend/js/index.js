@@ -45,7 +45,7 @@ $("#default-radio").hide();
 $("#from-box, #to-box").hide();
 
 $('[name="input"]').change(function () {
-  if (this.value === "transfer") {
+  if ($('[name="input"]:checked').val() === "transfer") {
     $("#from-box, #to-box").show();
     $("#acc-box").hide();
   } else {

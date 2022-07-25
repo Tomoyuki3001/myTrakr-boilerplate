@@ -138,7 +138,7 @@ export const postNewTransaction = function () {
     accountIdFrom: $("#accout-from").val(),
     accountIdTo: $("#accout-to").val(),
     amount: $("#amount-input").val(),
-    type: $('input:radio[name="input"]:checked').val(),
+    type: $('[name="input"]:checked').val(),
     description: $("#description-input").val(),
     category: $("#category-select").val(),
   };
@@ -154,8 +154,14 @@ export const postNewTransaction = function () {
     }
   }
   if (
-    (newTransaction.type == "transfer" &&
-      newTransaction.accountIdTo === "select") ||
+    newTransaction.type === "transfer" &&
+    newTransaction.accountIdTo === "select"
+  ) {
+    alert("Please select a valid account to transfer");
+    return;
+  }
+  if (
+    newTransaction.type === "transfer" &&
     newTransaction.accountIdFrom === "select"
   ) {
     alert("Please select a valid account to transfer");
