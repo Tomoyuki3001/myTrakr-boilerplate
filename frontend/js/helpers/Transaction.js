@@ -206,7 +206,6 @@ export const postNewTransaction = function () {
     contentType: "application/json; charset=utf-8",
     traditional: true,
   }).done((data) => {
-    console.log("data checking", data);
     setTransactionsToList(data);
     calcurateTransfer(data);
   });
