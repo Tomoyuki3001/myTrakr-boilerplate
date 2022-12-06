@@ -1,4 +1,4 @@
 //common functions that can be used in different cases
-export const domainUrl = "https://my-tracker-1130.herokuapp.com";
+export const domainUrl = "https://bank-tracker-apps.herokuapp.com/";
 
 export default domainUrl;
