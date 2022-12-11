@@ -6,6 +6,7 @@ body {
 @media (max-width: 600px) {
   .tracker_whole_box {
     padding: 0% 15% 10% 15%;
+    font-size: 24px;
     .tracker_header_h1 {
         font-size: 30px;
         margin: 10% 0%;
@@ -13,8 +14,9 @@ body {
 }
 .create_account{
   align-items: center;
-  .create_account_p {
+  .create_account_h2 {
       margin: 0% 2% 0% 0%;
+      font-size: 26px;
   }
       .create_account_input{
           width: 100%;
@@ -29,6 +31,11 @@ body {
       margin: 10% 0%;
   }
 }
+
+.transaction_h2 {
+  font-size: 26px;
+}
+
 label {
   display: block;
 }
@@ -88,8 +95,9 @@ input[type="radio"]:checked + span::after {
 .account_select_box, .category_select, .filter_account {
 align-items: center;
 margin-bottom: 2%;
-.account_select_p , .category_select_p, .filter_account_p{
+.account_select_h2 , .category_select_h2, .filter_account_h2{
 margin: 0% 1% 0% 0%;
+font-size: 26px;;
 }
 .select_account, .select_category, .select_filter {
 border: 1px solid #000000;
@@ -132,8 +140,8 @@ margin: 5% 0%;
 .description_box , .amount_box {
   align-items: center;
   margin-bottom: 2%;
-  p {
-    margin: 0%;
+  .description_h2, .amount_h2 {
+    font-size: 26px;
   }
   .description_input, .amount_input {
     margin-left: 2%;
