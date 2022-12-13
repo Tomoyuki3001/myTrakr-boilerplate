@@ -192,8 +192,9 @@ select {
 .create_account{
     display: flex;
     align-items: center;
-    .create_account_p {
+    .create_account_h2 {
         margin: 0% 2% 0% 0%;
+        font-size: 25px;
     }
         .create_account_input{
             width: 20%;
@@ -210,59 +211,66 @@ select {
 
 //Radio buttons
 
-    label {
-        display: block;
-      }
-      input[type="radio"] {
-        appearance: none;
-        display: none;
-        opacity: 0;
-        width: 1px;
-        position: absolute;
-        height: 1px;
-      }
-      input[type="radio"] + span {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        cursor: pointer;
-        padding: 10px 11px 8px 36px;
-        border-radius: 4px;
-        font-weight: 500;
-        font-size: 14px;
-      }
-      input[type="radio"] + span::before,
-      input[type="radio"] + span::after {
-        position: absolute;
-        content: "";
-        display: block;
-        border-radius: 50%;
-        top: 0;
-        bottom: 0;
-        margin: auto 10px auto 0;
-        box-sizing: border-box;
-      }
-      input[type="radio"] + span::before {
-        width: 20px;
-        height: 20px;
-        background: #fff;
-        border: 2px solid #999999;
-        left: 9px;
-      }
-      input[type="radio"] + span::after {
-        width: 10px;
-        height: 10px;
-        background: #999999;
-        left: 14px;
-        opacity: 0;
-      }
-      input[type="radio"]:checked + span::before {
-        border: 2px solid #0070bd;
-      }
-      input[type="radio"]:checked + span::after {
-        background: #0070bd;
-        opacity: 1;
-      }
+.new_transaction {
+  margin: 3% 0% 3% 0%;
+  .transaction_h2 {
+    margin: 3% 2% 0% 0%;
+          font-size: 25px;
+  }
+  label {
+    display: block;
+  }
+  input[type="radio"] {
+    appearance: none;
+    display: none;
+    opacity: 0;
+    width: 1px;
+    position: absolute;
+    height: 1px;
+  }
+  input[type="radio"] + span {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 10px 11px 8px 36px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  input[type="radio"] + span::before,
+  input[type="radio"] + span::after {
+    position: absolute;
+    content: "";
+    display: block;
+    border-radius: 50%;
+    top: 0;
+    bottom: 0;
+    margin: auto 10px auto 0;
+    box-sizing: border-box;
+  }
+  input[type="radio"] + span::before {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #999999;
+    left: 9px;
+  }
+  input[type="radio"] + span::after {
+    width: 10px;
+    height: 10px;
+    background: #999999;
+    left: 14px;
+    opacity: 0;
+  }
+  input[type="radio"]:checked + span::before {
+    border: 2px solid #0070bd;
+  }
+  input[type="radio"]:checked + span::after {
+    background: #0070bd;
+    opacity: 1;
+  }
+}
 
 //Select box setting
 
@@ -270,8 +278,9 @@ select {
   display: flex;
   align-items: center;
   margin-bottom: 2%;
-  .account_select_p , .category_select_p, .filter_account_p{
-    margin: 0% 1% 0% 0%;
+  .account_select_h2 , .category_select_h2, .filter_account_h2{
+    margin: 0% 2% 0% 0%;
+        font-size: 25px;
   }
   .select_account, .select_category, .select_filter {
     border: 1px solid #000000;
@@ -323,11 +332,11 @@ select {
   display: flex;
   align-items: center;
   margin-bottom: 2%;
-  p {
-    margin: 0%;
+  .description_h2, .amount_h2 {
+    margin: 0% 2% 0% 0%;
+    font-size: 25px;
   }
   .description_input, .amount_input {
-    margin-left: 2%;
     border: 1px solid #000000;
     padding: 0.5% 2%;;
   }

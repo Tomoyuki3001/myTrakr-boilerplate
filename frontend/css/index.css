@@ -180,8 +180,9 @@ input[type=radio] + span::after {
     display: flex;
     align-items: center;
   }
-  .create_account .create_account_p {
+  .create_account .create_account_h2 {
     margin: 0% 2% 0% 0%;
+    font-size: 25px;
   }
   .create_account .create_account_input {
     width: 20%;
@@ -194,10 +195,17 @@ input[type=radio] + span::after {
     color: #F7F7F7;
     padding: 0.5% 1%;
   }
-  label {
+  .new_transaction {
+    margin: 3% 0% 3% 0%;
+  }
+  .new_transaction .transaction_h2 {
+    margin: 3% 2% 0% 0%;
+    font-size: 25px;
+  }
+  .new_transaction label {
     display: block;
   }
-  input[type=radio] {
+  .new_transaction input[type=radio] {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
@@ -207,7 +215,7 @@ input[type=radio] + span::after {
     position: absolute;
     height: 1px;
   }
-  input[type=radio] + span {
+  .new_transaction input[type=radio] + span {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -217,8 +225,8 @@ input[type=radio] + span::after {
     font-weight: 500;
     font-size: 14px;
   }
-  input[type=radio] + span::before,
-input[type=radio] + span::after {
+  .new_transaction input[type=radio] + span::before,
+.new_transaction input[type=radio] + span::after {
     position: absolute;
     content: "";
     display: block;
@@ -228,24 +236,24 @@ input[type=radio] + span::after {
     margin: auto 10px auto 0;
     box-sizing: border-box;
   }
-  input[type=radio] + span::before {
+  .new_transaction input[type=radio] + span::before {
     width: 20px;
     height: 20px;
     background: #fff;
     border: 2px solid #999999;
     left: 9px;
   }
-  input[type=radio] + span::after {
+  .new_transaction input[type=radio] + span::after {
     width: 10px;
     height: 10px;
     background: #999999;
     left: 14px;
     opacity: 0;
   }
-  input[type=radio]:checked + span::before {
+  .new_transaction input[type=radio]:checked + span::before {
     border: 2px solid #0070bd;
   }
-  input[type=radio]:checked + span::after {
+  .new_transaction input[type=radio]:checked + span::after {
     background: #0070bd;
     opacity: 1;
   }
@@ -254,8 +262,9 @@ input[type=radio] + span::after {
     align-items: center;
     margin-bottom: 2%;
   }
-  .account_select_box .account_select_p, .account_select_box .category_select_p, .account_select_box .filter_account_p, .category_select .account_select_p, .category_select .category_select_p, .category_select .filter_account_p, .filter_account .account_select_p, .filter_account .category_select_p, .filter_account .filter_account_p {
-    margin: 0% 1% 0% 0%;
+  .account_select_box .account_select_h2, .account_select_box .category_select_h2, .account_select_box .filter_account_h2, .category_select .account_select_h2, .category_select .category_select_h2, .category_select .filter_account_h2, .filter_account .account_select_h2, .filter_account .category_select_h2, .filter_account .filter_account_h2 {
+    margin: 0% 2% 0% 0%;
+    font-size: 25px;
   }
   .account_select_box .select_account, .account_select_box .select_category, .account_select_box .select_filter, .category_select .select_account, .category_select .select_category, .category_select .select_filter, .filter_account .select_account, .filter_account .select_category, .filter_account .select_filter {
     border: 1px solid #000000;
@@ -297,11 +306,11 @@ input[type=radio] + span::after {
     align-items: center;
     margin-bottom: 2%;
   }
-  .description_box p, .amount_box p {
-    margin: 0%;
+  .description_box .description_h2, .description_box .amount_h2, .amount_box .description_h2, .amount_box .amount_h2 {
+    margin: 0% 2% 0% 0%;
+    font-size: 25px;
   }
   .description_box .description_input, .description_box .amount_input, .amount_box .description_input, .amount_box .amount_input {
-    margin-left: 2%;
     border: 1px solid #000000;
     padding: 0.5% 2%;
   }
